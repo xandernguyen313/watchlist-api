@@ -10,4 +10,5 @@ import java.util.List;
 public interface WatchListRepository extends JpaRepository<WatchList, Long> {
     WatchList findByUserIdAndNameIgnoreCase(Long userId, String watchListName);
     List<WatchList> findByUserId(Long userId);
+    WatchList findByUserIdAndId(Long userId, Long watchListId);
 }

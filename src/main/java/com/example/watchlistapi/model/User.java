@@ -27,6 +27,7 @@ public class User {
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private UserProfile userProfile;
 
+
     @OneToMany(mappedBy = "user")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<WatchList> watchList;
@@ -59,5 +60,19 @@ public class User {
         this.password = password;
     }
 
+    public UserProfile getUserProfile() {
+        return userProfile;
+    }
 
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
+
+    public List<WatchList> getWatchList() {
+        return watchList;
+    }
+
+    public void setWatchList(List<WatchList> watchList) {
+        this.watchList = watchList;
+    }
 }

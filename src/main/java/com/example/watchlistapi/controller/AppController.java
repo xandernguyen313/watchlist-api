@@ -28,4 +28,9 @@ public class AppController {
     public WatchList createWatchList(@RequestBody WatchList watchListObject) {
         return appService.createWatchList(watchListObject);
     }
+
+    @GetMapping("/watchlists/{watchListId}")
+    public WatchList getWatchList(@PathVariable Long watchListId) {
+        return appService.getWatchList(watchListId);
+    }
 }

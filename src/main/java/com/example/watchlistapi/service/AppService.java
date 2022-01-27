@@ -55,4 +55,20 @@ public class AppService {
     }
 
 
+    public WatchList getWatchList(Long watchListId) {
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null) {
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            return watchList;
+        }
+    }
+
+
+
+    public MyUserDetails getUserDetails() {
+        return (MyUserDetails)SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+    }
 }
