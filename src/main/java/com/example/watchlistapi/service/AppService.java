@@ -30,8 +30,7 @@ public class AppService {
 
 
     public List<WatchList> getAllWatchLists() {
-        MyUserDetails userDetails = (MyUserDetails)SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
+        MyUserDetails userDetails = getUserDetails();
         List<WatchList> watchLists = watchListRepository.findByUserId(userDetails.getUser().getId());
         if(watchLists.isEmpty()) {
             throw new NotFoundException("There are no watchlists associated with " + userDetails.getUser().getEmailAddress());
@@ -41,8 +40,7 @@ public class AppService {
     }
 
     public WatchList createWatchList(WatchList watchListObject) {
-        MyUserDetails userDetails = (MyUserDetails)SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
+        MyUserDetails userDetails = getUserDetails();
         WatchList watchList = watchListRepository
                 .findByUserIdAndNameIgnoreCase(userDetails.getUser().getId(), watchListObject.getName());
         if(watchList != null) {
