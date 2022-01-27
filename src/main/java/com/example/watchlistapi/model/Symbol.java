@@ -23,6 +23,12 @@ public class Symbol {
     public Symbol() {
     }
 
+    public Symbol(long id, String ticker, String companyName) {
+        this.id = id;
+        this.ticker = ticker;
+        this.companyName = companyName;
+    }
+
     public long getId() {
         return id;
     }

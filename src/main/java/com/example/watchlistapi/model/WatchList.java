@@ -29,9 +29,15 @@ public class WatchList {
             CascadeType.MERGE
     })
     @JoinTable
+    @JsonIgnore
     private Set<Symbol> symbols;
 
     public WatchList() {
+    }
+
+    public WatchList(Long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public Long getId() {
