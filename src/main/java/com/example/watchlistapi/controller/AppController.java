@@ -5,6 +5,8 @@ import com.example.watchlistapi.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/api")
 public class AppController {
@@ -16,6 +18,11 @@ public class AppController {
     }
 
 
+
+    @GetMapping("/watchlists")
+    public List<WatchList> getAllWatchLists() {
+        return appService.getAllWatchLists();
+    }
 
     @PostMapping("/watchlists")
     public WatchList createWatchList(@RequestBody WatchList watchListObject) {
