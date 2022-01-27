@@ -1,4 +1,4 @@
-package com.example.watchlistapi.model.security;
+package com.example.watchlistapi.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

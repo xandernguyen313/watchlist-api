@@ -1,4 +1,4 @@
-package com.example.watchlistapi.model.repository;
+package com.example.watchlistapi.repository;
 
 
 import com.example.watchlistapi.model.User;

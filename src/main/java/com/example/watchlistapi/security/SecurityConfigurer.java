@@ -1,4 +1,4 @@
-package com.example.watchlistapi.model.security;
+package com.example.watchlistapi.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

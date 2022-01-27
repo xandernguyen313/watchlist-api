@@ -1,4 +1,4 @@
-package com.example.watchlistapi.model.security;
+package com.example.watchlistapi.security;
 
 import com.example.watchlistapi.model.User;
 import org.springframework.security.core.GrantedAuthority;
