@@ -2,6 +2,7 @@ package com.example.watchlistapi.service;
 
 import com.example.watchlistapi.exception.InformationExistException;
 import com.example.watchlistapi.exception.NotFoundException;
+import com.example.watchlistapi.model.Symbol;
 import com.example.watchlistapi.model.WatchList;
 
 import com.example.watchlistapi.repository.SymbolRepository;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AppService {
@@ -86,6 +89,26 @@ public class AppService {
         } else {
             watchList.setName(watchListObject.getName());
             return watchListRepository.save(watchList);
+        }
+    }
+
+
+    public Symbol createSymbol(Long watchListId, Symbol symbolObject) {
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null) {
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            Symbol symbol = symbolRepository.findByTickerIgnoreCase(symbolObject.getTicker());
+            if(symbol == null) {
+                watchList.getSymbols().add(symbolObject);
+                watchListRepository.save(watchList);
+                return symbolObject;
+            } else {
+                watchList.getSymbols().add(symbol);
+                watchListRepository.save(watchList);
+                return symbol;
+            }
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.watchlistapi.controller;
 
+import com.example.watchlistapi.model.Symbol;
 import com.example.watchlistapi.model.WatchList;
 import com.example.watchlistapi.service.AppService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,10 @@ public class AppController {
     @PutMapping("/watchlists/{watchListId}")
     public WatchList updateWatchList(@PathVariable Long watchListId, @RequestBody WatchList watchListObject) {
         return appService.updateWatchList(watchListId, watchListObject);
+    }
+
+    @PostMapping("/watchlists/{watchlistId}/symbols")
+    public Symbol createSymbol(@PathVariable Long watchlistId, @RequestBody Symbol symbolObject) {
+        return appService.createSymbol(watchlistId, symbolObject);
     }
 }
