@@ -33,4 +33,14 @@ public class AppController {
     public WatchList getWatchList(@PathVariable Long watchListId) {
         return appService.getWatchList(watchListId);
     }
+
+    @DeleteMapping("/watchlists/{watchListId}")
+    public WatchList deleteWatchList(@PathVariable Long watchListId) {
+        return appService.deleteWatchlist(watchListId);
+    }
+
+    @PutMapping("/watchlists/{watchListId}")
+    public WatchList updateWatchList(@PathVariable Long watchListId, @RequestBody WatchList watchListObject) {
+        return appService.updateWatchList(watchListId, watchListObject);
+    }
 }

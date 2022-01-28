@@ -28,6 +28,10 @@ public class AppService {
         this.watchListRepository = watchListRepository;
     }
 
+    public MyUserDetails getUserDetails() {
+        return (MyUserDetails)SecurityContextHolder
+                .getContext().getAuthentication().getPrincipal();
+    }
 
     public List<WatchList> getAllWatchLists() {
         MyUserDetails userDetails = getUserDetails();
@@ -63,10 +67,27 @@ public class AppService {
         }
     }
 
-
-
-    public MyUserDetails getUserDetails() {
-        return (MyUserDetails)SecurityContextHolder
-                .getContext().getAuthentication().getPrincipal();
+    public WatchList deleteWatchlist(Long watchListId){
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null){
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            watchListRepository.deleteById(watchListId);
+            return watchList;
+        }
     }
+
+    public WatchList updateWatchList(Long watchListId, WatchList watchListObject) {
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null) {
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            watchList.setName(watchListObject.getName());
+            return watchListRepository.save(watchList);
+        }
+    }
+
+
 }
