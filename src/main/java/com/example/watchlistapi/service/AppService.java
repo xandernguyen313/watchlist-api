@@ -151,5 +151,22 @@ public class AppService {
         }
     }
 
-    
+    public Symbol deleteSymbol(Long watchListId, Long symbolId) {
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null) {
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            Symbol symbol = symbolRepository.findByWatchListsIdAndId(watchListId, symbolId);
+            if(symbol == null) {
+                throw new NotFoundException("The symbol with the id of " + symbolId + " does not exist");
+            } else {
+                watchList.getSymbols().removeIf(s -> s.equals(symbol));
+                watchListRepository.save(watchList);
+                return symbol;
+            }
+        }
+    }
+
+
 }

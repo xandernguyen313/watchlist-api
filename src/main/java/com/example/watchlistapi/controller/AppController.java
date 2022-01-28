@@ -64,4 +64,9 @@ public class AppController {
     public Symbol updateSymbol(@PathVariable Long watchListId, @PathVariable Long symbolId, @RequestBody Symbol symbolObject) {
         return appService.updateSymbol(watchListId, symbolId, symbolObject);
     }
+
+    @DeleteMapping("/watchlists/{watchListId}/symbols/{symbolId}")
+    public Symbol deleteSymbol(@PathVariable Long watchListId, @PathVariable Long symbolId) {
+        return appService.deleteSymbol(watchListId, symbolId);
+    }
 }
