@@ -45,8 +45,18 @@ public class AppController {
         return appService.updateWatchList(watchListId, watchListObject);
     }
 
-    @PostMapping("/watchlists/{watchlistId}/symbols")
-    public Symbol createSymbol(@PathVariable Long watchlistId, @RequestBody Symbol symbolObject) {
-        return appService.createSymbol(watchlistId, symbolObject);
+    @PostMapping("/watchlists/{watchListId}/symbols")
+    public Symbol createSymbol(@PathVariable Long watchListId, @RequestBody Symbol symbolObject) {
+        return appService.createSymbol(watchListId, symbolObject);
+    }
+
+    @GetMapping("/watchlists/{watchListId}/symbols/{symbolId}")
+    public Symbol getSymbol(@PathVariable Long watchListId, @PathVariable Long symbolId) {
+        return appService.getSymbol(watchListId, symbolId);
+    }
+
+    @GetMapping("/watchlists/{watchListId}/symbols")
+    public List<Symbol> getAllSymbols(@PathVariable Long watchListId) {
+        return appService.getAllSymbols(watchListId);
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -112,5 +113,24 @@ public class AppService {
         }
     }
 
+    public Symbol getSymbol(Long watchListId, Long symbolId) {
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null) {
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            return watchList.getSymbols().stream().filter(s -> s.getId() == symbolId).findAny().orElseThrow();
+        }
+    }
 
+
+    public List<Symbol> getAllSymbols(Long watchListId) {
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null) {
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            return symbolRepository.findByWatchListsId(watchListId);
+        }
+    }
 }
