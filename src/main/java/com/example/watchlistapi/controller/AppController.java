@@ -59,4 +59,9 @@ public class AppController {
     public List<Symbol> getAllSymbols(@PathVariable Long watchListId) {
         return appService.getAllSymbols(watchListId);
     }
+
+    @PutMapping("/watchlists/{watchListId}/symbols/{symbolId}")
+    public Symbol updateSymbol(@PathVariable Long watchListId, @PathVariable Long symbolId, @RequestBody Symbol symbolObject) {
+        return appService.updateSymbol(watchListId, symbolId, symbolObject);
+    }
 }

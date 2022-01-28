@@ -133,4 +133,23 @@ public class AppService {
             return symbolRepository.findByWatchListsId(watchListId);
         }
     }
+
+    public Symbol updateSymbol(Long watchListId, Long symbolId, Symbol symbolObject) {
+        MyUserDetails userDetails = getUserDetails();
+        WatchList watchList = watchListRepository.findByUserIdAndId(userDetails.getUser().getId(), watchListId);
+        if(watchList == null) {
+            throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
+        } else {
+            Symbol symbol = symbolRepository.findByWatchListsIdAndId(watchListId, symbolId);
+            if(symbol == null) {
+                throw new NotFoundException("The symbol with the id of " + symbolId + " does not exist");
+            } else {
+                symbol.setTicker(symbolObject.getTicker());
+                symbol.setCompanyName(symbolObject.getCompanyName());
+                return symbolRepository.save(symbol);
+            }
+        }
+    }
+
+    
 }

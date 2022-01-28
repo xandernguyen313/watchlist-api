@@ -12,4 +12,5 @@ public interface SymbolRepository extends JpaRepository<Symbol, Long> {
 
     Symbol findByTickerIgnoreCase(String tickerName);
     List<Symbol> findByWatchListsId(Long watchListId);
+    Symbol findByWatchListsIdAndId(Long watchListId, Long symbolId);
 }
