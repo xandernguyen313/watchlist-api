@@ -116,7 +116,12 @@ public class AppService {
         if(watchList == null) {
             throw new NotFoundException("The watchlist with the id of " + watchListId + " does not exist");
         } else {
-            return watchList.getSymbols().stream().filter(s -> s.getId() == symbolId).findAny().orElseThrow();
+            Symbol symbol = symbolRepository.findByWatchListsIdAndId(watchListId, symbolId);
+            if(symbol == null) {
+                throw new NotFoundException("The symbol with the id of " + symbolId + " does not exist");
+            } else {
+                return symbol;
+            }
         }
     }
 
