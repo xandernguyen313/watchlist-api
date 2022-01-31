@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
+
 public class AppController {
     private AppService appService;
 
