@@ -4,7 +4,10 @@ Project Description: This backend application allows users to store their watchl
 ## Entity Relationship Diagram
 ![ERD](https://github.com/xandernguyen313/watchlist-api/blob/main/erd.JPG)
 
-## Endpoints:  
+## Endpoints:
+
+### URL: 
+*https://watch-list-api.herokuapp.com/*
 
 | Request Type | URL                       | Request Body               | Request Header              | Action                                                          | Access  |   
 |--------------|---------------------------|----------------------------|-----------------------------|-----------------------------------------------------------------|---------|
