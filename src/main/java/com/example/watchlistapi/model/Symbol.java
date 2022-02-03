@@ -11,10 +11,10 @@ public class Symbol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String ticker;
 
-    @Column
+    @Column(nullable = false)
     private String companyName;
 
     @ManyToMany(mappedBy = "symbols")
